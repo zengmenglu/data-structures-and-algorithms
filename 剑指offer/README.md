@@ -1,18 +1,6 @@
-# 3 找出重复数
+# 3 数组中重复的数字
 
 给定一个包含 n + 1 个整数的数组 nums，其数字都在 1 到 n 之间（包括 1 和 n），可知至少存在一个重复的整数。假设只有一个重复的整数，找出这个重复的数。
-
-```
-示例 1:
-
-输入: [1,3,4,2,2]
-输出: 2
-
-示例 2:
-
-输入: [3,1,3,4,2]
-输出: 3
-```
 
 题目链接 [Leetcode 287](https://leetcode-cn.com/problems/find-the-duplicate-number/)
 
@@ -46,3 +34,10 @@ func findDuplicate(nums []int) int {
 	return slow
 }
 ```
+
+# 4 二维数组中的查找
+
+在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。 
+
+题目链接 [Leetcode 240](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/)
+
