@@ -34,7 +34,7 @@ func findDuplicate(nums []int) int {
 	fast, slow := nums[0], nums[0]
 	for {
 		fast = nums[nums[fast]]
-		slow = nums[nums[slow]]
+		slow = nums[slow]
 		if fast == slow {break}
 	}
 	
