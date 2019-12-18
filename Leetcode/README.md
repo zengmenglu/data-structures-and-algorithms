@@ -1,11 +1,13 @@
 [toc]
 
 # 42 缺失的第一个正数
-给定一个未排序的整数数组，找出其中没有出现的最小的正整数。
 
-[题目LINK Leetcode 42](https://leetcode-cn.com/problems/first-missing-positive/)
+给定一个未排序的整数数组，找出其中没有出现的最小的正整数。[题目LINK Leetcode 42](https://leetcode-cn.com/problems/first-missing-positive/) 
 
 与剑指 offer第三题类似，不同之处在于可能出现负数或大于数组长度n的数。对于这样的数跳过即可，对其他1～n的数换到下标0～n-1的位置。如果数组内数据为[1,2,...,n], 那么第一个未出现的正数是n+1，所以第一个未出现的正数范围是1～n+1。
+
+*  nums[i] == i+1 符合置换条件，不需要交换。
+*  nums[i] == nums[nums[i]-1] 两个交换值相等的情况下，会产生死循环，所以也无需交换，继续下一个。
 
 ```
 func firstMissingPositive(nums []int) int {
@@ -26,8 +28,7 @@ func firstMissingPositive(nums []int) int {
     return n+1
 }
 ```
-*  nums[i] == i+1 符合置换条件，不需要交换。
-*  nums[i] == nums[nums[i]-1] 两个交换值相等的情况下，会产生死循环，所以也无需交换，继续下一个。
+
 
 # 1277. 统计全为 1 的正方形子矩阵
 
