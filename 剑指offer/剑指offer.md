@@ -1,8 +1,6 @@
 # 3 数组中重复的数字
 
-给定一个包含 n + 1 个整数的数组 nums，其数字都在 1 到 n 之间（包括 1 和 n），可知至少存在一个重复的整数。假设只有一个重复的整数，找出这个重复的数。
-
-题目链接 [Leetcode 287](https://leetcode-cn.com/problems/find-the-duplicate-number/)
+给定一个包含 n + 1 个整数的数组 nums，其数字都在 1 到 n 之间（包括 1 和 n），可知至少存在一个重复的整数。假设只有一个重复的整数，找出这个重复的数。题目链接 [Leetcode 287](https://leetcode-cn.com/problems/find-the-duplicate-number/).
 
 * 本题改变数组的方法为，将数值a放在下标为a的位置上，直到某个下标有多个值要放在其上。
 * 若不允许改变数组，有两种方法：
@@ -37,7 +35,5 @@ func findDuplicate(nums []int) int {
 
 # 4 二维数组中的查找
 
-在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。 
-
-题目链接 [Leetcode 240](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/)
+在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。 题目链接 [Leetcode 240](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/).
 
