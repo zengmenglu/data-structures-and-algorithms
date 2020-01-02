@@ -1,4 +1,3 @@
-[toc]
 
 # 42 缺失的第一个正数
 
@@ -26,6 +25,25 @@ func firstMissingPositive(nums []int) int {
         }
     }
     return n+1
+}
+```
+
+# 96. 不同的二叉搜索树
+给定一个整数 n，求以 1 ... n 为节点组成的二叉搜索树有多少种？[题目LINK](https://leetcode-cn.com/problems/unique-binary-search-trees/) TAG：【递归】
+
+本题是一维的递归算法，构造```result[i]```代表```1～i```组成的二叉搜索树的种类。可以知道m~n的二叉搜索树的种类等于1～n-m+1为节点组成的二叉搜索树。又根据二叉搜索树的性质，root左边的数小于root，右边的数大于root。因此，1～i为节点的二叉搜索树的种类是以1～i分别为root时左右两边二叉树种类的乘积。
+
+```
+func numTrees(n int) int {
+    var result = make([]int, n+1)
+    result[0] = 1
+    result[1] = 1
+    for i:=2;i<=n;i++{  
+        for r:=1;r<=i;r++{// 以r为root
+                result[i] += result[r-1]*result[i-r]
+        }
+    }
+    return result[n]
 }
 ```
 
