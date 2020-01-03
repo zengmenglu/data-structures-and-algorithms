@@ -28,10 +28,38 @@ func firstMissingPositive(nums []int) int {
 }
 ```
 
-# 96. 不同的二叉搜索树
-给定一个整数 n，求以 1 ... n 为节点组成的二叉搜索树有多少种？[题目LINK](https://leetcode-cn.com/problems/unique-binary-search-trees/) TAG：【递归】
+# 46. 全排列
+给定一个没有重复数字的序列，返回其所有可能的全排列。[题目LINK](https://leetcode-cn.com/problems/permutations/) TAG：【递归】【回溯】
 
-本题是一维的递归算法，构造```result[i]```代表```1～i```组成的二叉搜索树的种类。可以知道m~n的二叉搜索树的种类等于1～n-m+1为节点组成的二叉搜索树。又根据二叉搜索树的性质，root左边的数小于root，右边的数大于root。因此，1～i为节点的二叉搜索树的种类是以1～i分别为root时左右两边二叉树种类的乘积。
+假设数字序列为```[0...n-1]```,首先是确定第一个数，将序号为0～n-1的数分别与第一个数交换位置。交换完了之后要恢复数组原貌，再确定第二个数，将第二个数后面所有数字和第二个数交换。如此，直到确定了所有数之后就得到了一个结果。
+
+* 注意这里储存结果的二维数组必须得使用指针，否则结果传不出来。
+* 如果不恢复原貌，得到的结果会有重复，并且得到的结果不全。
+* 交换一定要从start开始，而不是start+1，
+
+```
+func permute(nums []int) [][]int {
+	var results [][]int
+	backTrace(nums, &results,0)
+	return results
+}
+
+func backTrace(nums []int, results *[][]int, start int){
+	if start == len(nums){
+		*results = append(*results,append([]int{},nums...))
+	}
+	for i := start; i < len(nums); i++{
+		nums[start],nums[i] = nums[i],nums[start] // 交换
+		backTrace(nums, results, start+1) // 计算下一个数
+		nums[start],nums[i] = nums[i],nums[start] // 恢复原貌
+	}
+}
+```
+
+# 96. 不同的二叉搜索树
+给定一个整数 n，求以 1 ... n 为节点组成的二叉搜索树有多少种？[题目LINK](https://leetcode-cn.com/problems/unique-binary-search-trees/) TAG：【动态规划】
+
+本题是一维的动态规划算法，构造```result[i]```代表```1～i```组成的二叉搜索树的种类。可以知道m~n的二叉搜索树的种类等于1～n-m+1为节点组成的二叉搜索树。又根据二叉搜索树的性质，root左边的数小于root，右边的数大于root。因此，1～i为节点的二叉搜索树的种类是以1～i分别为root时左右两边二叉树种类的乘积。
 
 ```
 func numTrees(n int) int {
@@ -221,3 +249,43 @@ dp[i][j] = min(dp[i][j],dp[m][j-1]+cost[m+1][i]), m=1...i-1
 ```
 
 ```dp[i][j]``` 代表字符串s前i个字符分成j个子串需要修改的最少字符数，```cost[m][n]```代表字符串第m到n个字符的子串变成回文需要修改的最小字符数。（下标均为从1开始）
+
+```
+func initCost(s string) [][]int { // cost[i][j]表示第i～j字符段成为回文需要变化的次数，下标0开始
+	var cost = make([][]int, len(s))
+	for i := 0; i < len(s); i++{
+		cost[i] = make([]int, len(s))
+		for j := i+1; j < len(s); j++{
+			for m,n := i,j; m < n ; m,n = m+1, n-1 {
+				if s[m] != s[n]{
+					cost[i][j]++
+				}
+			}
+		}
+	}
+	return cost
+}
+
+func palindromePartition(s string, k int) int {
+	var cost = initCost(s)
+	var dp = make([][]int, len(s)+1) // dp[i][j]表示0～（i-1）前i个字符段分成k份，每份为回文的次数
+	for i := 1; i <= len(s); i++ {
+		dp[i] = make([]int, k+1)
+		dp[i][1]=cost[0][i-1]
+		for j := 2; j <= k && j < i; j++ {
+			dp[i][j] = len(s)
+			for m := 1; m < i; m++{
+				dp[i][j] = min(dp[i][j],dp[m][j-1]+cost[m][i-1])
+			}
+		}
+	}
+	return dp[len(s)][k]
+}
+
+func min(a, b int) int{
+	if a < b {
+		return a
+	}
+	return b
+}
+```
