@@ -104,6 +104,37 @@ func findMin(nums []int) int {
 }
 ```
 
+# 403. 青蛙过河
+
+给定石子的位置列表（用单元格序号升序表示）， 请判定青蛙能否成功过河（即能否在最后一步跳至最后一个石子上）。 开始时， 青蛙默认已站在第一个石子上，并可以假定它第一步只能跳跃一个单位（即只能从单元格1跳至单元格2）。如果青蛙上一步跳跃了 k 个单位，那么它接下来的跳跃距离只能选择为 k - 1、k 或 k + 1个单位。 另请注意，青蛙只能向前方（终点的方向）跳跃。实例：输入[0,1,3,5,6,8,12,17]，输出true。[题目LINK](https://leetcode-cn.com/problems/frog-jump/) TAG：【动态规划】
+
+本题涉及二维的动态规划
+
+* dp[i][j] 表示在stones[i]上可以跳跃j步。
+* 当计算到dp[i][j]， i=n-1且存在为true的j时，说明前一个节点也可以跳j步到达这最后一个石头上。
+
+```
+func canCross(stones []int) bool {
+	var dp = make([][]bool, len(stones)) // 在stones[i]上可以跳跃j步
+	for i := range dp {
+		dp[i] = make([]bool, len(stones))
+	}
+	dp[0][1] = true
+	for i := 1; i < len(stones); i++ {
+		for j := 0; j < i; j++ {
+			dis := stones[i] - stones[j]
+			if dis <= 0 || dis >= len(stones) || !dp[j][dis] {continue}// dis的范围判断是为了dp[j][dis]下标不越界
+			if i == len(stones)-1 {return true} // 成功判定
+			dp[i][dis] = true // 更新dp数组
+			if dis-1 > 0 {	dp[i][dis-1] = true}
+			if dis+1 < len(stones) {dp[i][dis+1] = true}
+		}
+	}
+	return false
+}
+```
+
+
 # 912. 排序数组
 给定一个整数数组 nums，将该数组升序排列。[题目LINK](https://leetcode-cn.com/problems/sort-an-array/)
 TAG：【排序】【数组】
