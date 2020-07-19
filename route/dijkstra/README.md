@@ -7,7 +7,7 @@ Dijkstra算法是求源节点到其他节点的最短路径的贪婪算法
 
 时间复杂度为o(n^2)。
 
-![](pic/graph.png)
+<img src="./pic/graph.png" width = "300" height = "200" align=center />
 
 ## 基于优先级队列的算法优化
 
