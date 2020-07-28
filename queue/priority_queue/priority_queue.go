@@ -7,11 +7,13 @@ import (
 
 // user should implement this interface
 type Interface interface {
-	Less(i Interface) bool
+	Less(i interface{}) bool
 }
 
 func New() *PriorityQueue {
-	return &PriorityQueue{data: new(myHeap)}
+	p:= &PriorityQueue{data: new(myHeap)}
+	heap.Init(p.data)
+	return p
 }
 
 type PriorityQueue struct {
@@ -29,13 +31,13 @@ func (p *PriorityQueue) Empty() bool {
 	return false
 }
 
-func (p *PriorityQueue) Push(data Interface) {
+func (p *PriorityQueue) Push(data interface{}) {
 	p.Lock()
 	defer p.Unlock()
 	heap.Push(p.data, data)
 }
 
-func (p *PriorityQueue) Pop() Interface {
+func (p *PriorityQueue) Pop() interface{} {
 	p.Lock()
 	defer p.Unlock()
 	return p.data.Pop().(Interface)
@@ -47,7 +49,7 @@ func (p *PriorityQueue) Size() int {
 	return p.data.Len()
 }
 
-func (p *PriorityQueue) Top() Interface {
+func (p *PriorityQueue) Top() interface{} {
 	p.RLock()
 	defer p.RUnlock()
 	if p.Size() == 0 {
