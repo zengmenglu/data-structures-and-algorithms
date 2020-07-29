@@ -12,7 +12,6 @@ type Interface interface {
 
 func New() *PriorityQueue {
 	p:= &PriorityQueue{data: new(myHeap)}
-	//heap.Init(p.data)
 	return p
 }
 
