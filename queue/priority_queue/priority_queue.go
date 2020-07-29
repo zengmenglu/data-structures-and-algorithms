@@ -7,7 +7,7 @@ import (
 
 // user should implement this interface
 type Interface interface {
-	Less(i interface{}) bool
+	Prior(i interface{}) bool
 }
 
 func New() *PriorityQueue {
@@ -54,14 +54,14 @@ func (p *PriorityQueue) Top() interface{} {
 	if p.Size() == 0 {
 		return nil
 	}
-	return (*p.data)[p.Size()-1]
+	return (*p.data)[0]
 }
 
 // implement heap
 type myHeap []Interface
 
 func (q *myHeap) Less(i, j int) bool {
-	return (*q)[i].Less((*q)[j])
+	return (*q)[i].Prior((*q)[j])
 }
 
 func (q *myHeap) Swap(i, j int) {
