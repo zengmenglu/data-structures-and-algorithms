@@ -5,10 +5,10 @@ import (
 	"testing"
 )
 
-type  Int int
+type Int int
 
-func(i Int) Prior(j interface{})bool{
-	return i>j.(Int) // 数值大的优先级高
+func (i Int) Prior(j interface{}) bool {
+	return i > j.(Int) // 数值大的优先级高
 }
 
 func TestPriorityQueue(t *testing.T) {

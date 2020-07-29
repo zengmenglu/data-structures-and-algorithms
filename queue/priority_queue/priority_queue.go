@@ -11,7 +11,7 @@ type Interface interface {
 }
 
 func New() *PriorityQueue {
-	p:= &PriorityQueue{data: new(myHeap)}
+	p := &PriorityQueue{data: new(myHeap)}
 	return p
 }
 
