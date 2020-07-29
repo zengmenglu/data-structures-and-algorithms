@@ -12,7 +12,7 @@ type Interface interface {
 
 func New() *PriorityQueue {
 	p:= &PriorityQueue{data: new(myHeap)}
-	heap.Init(p.data)
+	//heap.Init(p.data)
 	return p
 }
 
@@ -40,7 +40,7 @@ func (p *PriorityQueue) Push(data interface{}) {
 func (p *PriorityQueue) Pop() interface{} {
 	p.Lock()
 	defer p.Unlock()
-	return p.data.Pop().(Interface)
+	return heap.Pop(p.data).(Interface)
 }
 
 func (p *PriorityQueue) Size() int {

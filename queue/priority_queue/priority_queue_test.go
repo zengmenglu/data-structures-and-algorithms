@@ -19,6 +19,11 @@ func TestPriorityQueue(t *testing.T) {
 	queue.Push(Int(9))
 	queue.Push(Int(7))
 	queue.Push(Int(0))
-	data:=queue.Pop()
-	fmt.Println(data)
+	fmt.Println(queue.Pop())
+	fmt.Println(queue.Pop())
+	fmt.Println(queue.Pop())
+	fmt.Println(queue.Pop())
+	fmt.Println(queue.Pop())
+	fmt.Println(queue.Pop())
+	fmt.Println(queue.Pop())
 }
