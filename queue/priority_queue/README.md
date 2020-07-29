@@ -16,12 +16,16 @@
 2. 操作系统的优先级任务调度策略。
 
 ## API
+
+[点击获取使用示例代码](priority_queue_test.go)
+
 1. 创建优先级队列
 ```go
 New() *PriorityQueue 
 ```
 
 2. 定义优先级
+
 优先级队列中的数据类型需要实现如下接口来定义元素的优先级：
 ```go
 Prior(i interface{}) bool
@@ -52,7 +56,7 @@ Top() interface{}
 Size() int
 ```
 
-[示例代码](priority_queue_test.go)
+
 
 > 参考：
 > * https://github.com/gansidui/priority_queue 
